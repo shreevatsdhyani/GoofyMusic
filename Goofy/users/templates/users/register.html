@@ -15,19 +15,20 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <title>Goofy - SignUp</title>
+  <link rel="icon" type="image/svg+xml" href="{%static 'users/logo60.svg' %}">
 
 </head>
 
 <body>
   <div class="bg-[#1e1e1e] w-full flex flex-col items-center h-screen pt-10">
-    <div class="bg-[#121212] h-[90%] w-[30%] bg-blur flex-col items-center justify-center rounded-3xl">
+    <div class="bg-black w-[30%] bg-blur flex-col items-center justify-center rounded-3xl">
 
       <div class="mt-2 faster-one bg-[#1D88E6] bg-clip-text text-transparent pl-[22%]">GOOFY</div>
-      <form method="post" class="mt-4 flex flex-col h-[50%] w-[30%] min-w-[400px] items-center pl-[10%]">
+      <form method="post" class="my-2 flex flex-col h-[50%] w-[30%] min-w-[400px] items-center pl-[10%]">
         {% csrf_token %}
         <div class="text-white text-[150%] font-bold inter">Create your account</div>
 
-        <div class="mt-4 flex flex-col h-[55%] w-[70%]">
+        <div class="mt-4 flex flex-col gap-y-2 h-[55%] w-[70%]">
           <input type="text" name="username" placeholder="Username" value="{{ form.username.value|default:'' }}"
             required
             class="h-[60px] bg-white bg-opacity-50 rounded-[25px] shadow border border-[#1d88e6] placeholder:text-white interlight px-2 placeholder:opacity-50">
@@ -84,7 +85,7 @@
       <div class="pl-[7%]">
         <div class="ml-[7rem] text-white pl-[68px] text-lg inter">Or</div>
         <!-- <hr class="w-[50%] max-w-[210px] mt-3 mx-[90px]"> -->
-        <div class="flex pr-10 my-1 justify-center">
+        <div class="flex pr-12 my-1 justify-center">
           <form action="{% provider_login_url 'google' %}" method="post">
             {% csrf_token %}
             <button type="submit"><img class="" src="{% static 'users\googlesignup.svg' %}" alt=""></button>
@@ -94,7 +95,7 @@
             <button type="submit"><img class="w-[33px] h-[33px]" src="{% static 'users/flogo.svg' %}" alt=""></button>
           </form> -->
         </div>
-        <div class="flex space-x-1 pl-[15%]">
+        <div class="flex space-x-1 pt-4 pl-[15%]">
           <div class="text-white">Already have an account?</div>
           <a class="text-[#1d88e6] hover:underline" href="{% url 'login_view' %}">Login here</a>
         </div>
