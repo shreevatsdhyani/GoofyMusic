@@ -1,7 +1,7 @@
 
 
 function lnav() {
-    $("#profile-container").toggleClass("sm:ml-[100px]");
+    // $("#profile-container").toggleClass("sm:ml-[100px]");
     document.getElementById("goofy-ham").classList.toggle("hidden");
     document.getElementById("leftnav").classList.toggle("hidden");
     const navelements = ["home", "explore", "library", "likedsongs","profile"];

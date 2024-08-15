@@ -28,7 +28,7 @@
         {% csrf_token %}
         <div class="text-white text-[150%] font-bold inter">Create your account</div>
 
-        <div class="mt-4 flex flex-col gap-y-2 h-[55%] w-[70%]">
+        <div class="mt-4 flex flex-col gap-y-1 h-[55%] w-[70%]">
           <input type="text" name="username" placeholder="Username" value="{{ form.username.value|default:'' }}"
             required
             class="h-[60px] bg-white bg-opacity-50 rounded-[25px] shadow border border-[#1d88e6] placeholder:text-white interlight px-2 placeholder:opacity-50">
@@ -83,7 +83,7 @@
       </div>
       {% endif %}
       <div class="pl-[7%]">
-        <div class="ml-[7rem] text-white pl-[68px] text-lg inter">Or</div>
+        <div class="ml-[7rem] text-white pl-[68px] text-lg pb-2 inter">Or</div>
         <!-- <hr class="w-[50%] max-w-[210px] mt-3 mx-[90px]"> -->
         <div class="flex pr-12 my-1 justify-center">
           <form action="{% provider_login_url 'google' %}" method="post">
@@ -95,7 +95,7 @@
             <button type="submit"><img class="w-[33px] h-[33px]" src="{% static 'users/flogo.svg' %}" alt=""></button>
           </form> -->
         </div>
-        <div class="flex space-x-1 pt-4 pl-[15%]">
+        <div class="flex space-x-1 pt-2 pl-[15%]">
           <div class="text-white">Already have an account?</div>
           <a class="text-[#1d88e6] hover:underline" href="{% url 'login_view' %}">Login here</a>
         </div>
