@@ -1,9 +1,6 @@
-{% extends "mainapp/base.html" %}
+
 {% load static %}
 
-
-{% block title %}Library{% endblock title %}
-{% block content %}
 <div id="allelements" class="pt-8 flex flex-col ml-2 sm:ml-[100px] ">
 
     <div class="flex-col poppins-regular mt-16 ">
@@ -60,14 +57,14 @@
                             <div class="col-span-2">
                                 <label for="name"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-                                <input type="text" name="name" id="name"
+                                <input type="text" name="name" id="lib-name"
                                     class="bg-white border border-black text-black text-sm rounded-lg focus:ring-white focus:border-white block w-full p-2.5 dark:bg-black dark:border-white dark:placeholder-gray-300 dark:text-white dark:focus:ring-white dark:focus:border-white"
                                     placeholder="Type playlist title" required>
                             </div>
                             <div class="col-span-2">
                                 <label for="description"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                                <textarea id="description" name="description" rows="4"
+                                <textarea id="lib-description" name="description" rows="4"
                                     class="block p-2.5 w-full text-sm text-black bg-white rounded-lg border border-black focus:ring-white focus:border-white dark:bg-black dark:border-white dark:placeholder-gray-300 dark:text-white dark:focus:ring-white dark:focus:border-white"
                                     placeholder="Write playlist description here"></textarea>
                             </div>
@@ -89,16 +86,20 @@
 
     </div>
 </div>
-{% endblock content %}
-{% block script %}
+
 <script>
+    $("#grad-control").removeClass("gradnav1");
+    $("#allelements1").remove();
     $('#libimg').attr("src", "{% static 'mainapp/homepageassets/library1.svg' %}");
     $('#homeimg').attr("src", "{% static 'mainapp/homepageassets/home2.svg' %}");
     $('#exploreimg').attr("src", "{% static 'mainapp/homepageassets/explore2.svg' %}");
     $('#likedsongsimg').attr("src", "{% static 'mainapp/homepageassets/mylikes2.svg' %}");
     $('#profileimg').attr("src", "{% static 'mainapp/homepageassets/profile2.svg' %}");
 
-
+    $('body').removeClass("bg-gradient-to-r from-[#0f0f0f] from-5% via-[#1a1a1a] via-20% via-[#3e6b8f] via-50% to-[#002b5c] to-90%");
+    $('html, body').css(
+                            'background-color', '#121212'
+                        );
 
     $('#homebox').removeClass('hover:border-l-[#5398C9]').addClass('hover:border-l-white');
     $('#explorebox').removeClass('hover:border-l-[#5398C9]').addClass('hover:border-l-white');
@@ -108,6 +109,28 @@
     $('#lchild').removeClass("bg-transparent");
     $('#lchild').addClass("gradnav");
 </script>
+
+<script>
+    let modal;
+
+
+const modalToggle = document.querySelector('[data-modal-toggle="crud-modal"]');
+const modalClose = document.querySelector('[data-modal-close="crud-modal"]');
+modal = document.getElementById('crud-modal');
+modalToggle.addEventListener('click', function () {
+    modal.classList.toggle('hidden');
+});
+
+modalClose.addEventListener('click', function () {
+    modal.classList.toggle('hidden');
+    $('#playlist-form').attr('action', '{% url "createPlaylist" %}');
+    $("#crud-title").empty();
+    $("#crud-title").append("Create Playlist");
+    $("#crud-btn").empty();
+    $("#crud-btn").append("Create");
+});
+</script>
+
 <script>
     $.ajax({
         url: "{% url 'getPlaylists' %}",
@@ -142,26 +165,7 @@
         }
     });
 </script>
-<script>
-    let modal;
-    document.addEventListener('DOMContentLoaded', function () {
-        const modalToggle = document.querySelector('[data-modal-toggle="crud-modal"]');
-        const modalClose = document.querySelector('[data-modal-close="crud-modal"]');
-        modal = document.getElementById('crud-modal');
-        modalToggle.addEventListener('click', function () {
-            modal.classList.toggle('hidden');
-        });
 
-        modalClose.addEventListener('click', function () {
-            modal.classList.toggle('hidden');
-            $('#playlist-form').attr('action', '{% url "createPlaylist" %}');
-            $("#crud-title").empty();
-            $("#crud-title").append("Create Playlist");
-            $("#crud-btn").empty();
-            $("#crud-btn").append("Create");
-        });
-    });
-</script>
 <script>
     function deletePlaylist(playlist_id) {
         $.post({
@@ -171,7 +175,7 @@
                 'csrfmiddlewaretoken': getCSRFToken()
             },
             success: function (response) {
-                location.reload();
+                setLibraryPage();
             }
         });
     }
@@ -277,4 +281,25 @@
         modal.classList.toggle("hidden");
     }
 </script>
-{% endblock script %}
+<script>
+    $(document).ready(function () {
+        $('#playlist-form').submit(function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Make the POST request
+            $.ajax({
+                url: "{% url 'createPlaylist' %}",
+                type: "POST",
+                data: $(this).serialize(), // Serialize the form data
+                success: function (data) {
+                    // On success, redirect to another page
+                    setLibraryPage();
+                },
+                error: function (error) {
+                    // Handle error
+                    console.error('Error:', error);
+                }
+            });
+        });
+    });
+</script>
