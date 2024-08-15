@@ -1,0 +1,392 @@
+{% extends "mainapp/base.html" %}
+{% load static %}
+
+
+{% block title %}Home{% endblock title %}
+{% block content %}
+
+<div id="allelements" class=" flex flex-col ml-2 sm:ml-[100px]">
+
+    <div class="flex-col poppins-regular mt-10 ">
+        <div class="text-white flex w-[98%] text-[30px] justify-between">
+            <div class="montserrat">Trending</div>
+            <div id="scrollnavbtn" class="flex">
+                <button class="hover:scale-110" onclick="horizontalscroll(true,'parentscrolldiv2')">
+                    <div class="m-1"><img src="{% static 'mainapp/homepageassets/larrow.svg' %}" alt=""></div>
+                </button>
+                <button class="hover:scale-110" onclick="horizontalscroll(false,'parentscrolldiv2')">
+                    <div class="m-1"><img src="{% static 'mainapp/homepageassets/rarrow.svg' %}" alt=""></div>
+                </button>
+            </div>
+        </div>
+        <div id="parentscrolldiv2"
+            class="scrollbar   sm:hover:overflow-x-scroll sm:overflow-hidden h-64  w-[98%] pt-4 grid grid-flow-col auto-cols-auto  scroll-smooth space-x-5">
+            {% for _ in 'x'|rjust:10 %}
+            <div>
+                <div class="h-40 w-40 bg-gray-800 animate-pulse shadow-lg rounded-md">
+
+                </div>
+                <div class="w-32 h-2 rounded bg-gray-700 animate-pulse  mt-3 ml-1">
+
+                </div>
+                <div class="w-20 h-2 rounded bg-gray-700 animate-pulse  mt-3 ml-1">
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+    <div class="flex-col poppins-regular mt-10 ">
+        <div class="text-white flex w-[98%] text-[30px] justify-between">
+            <div class="montserrat">Albums Right Now</div>
+            <div id="scrollnavbtn" class="flex">
+                <button class="hover:scale-110" onclick="horizontalscroll(true,'parentscrolldiv3')">
+                    <div class="m-1"><img src="{% static 'mainapp/homepageassets/larrow.svg' %}" alt=""></div>
+                </button>
+                <button class="hover:scale-110" onclick="horizontalscroll(false,'parentscrolldiv3')">
+                    <div class="m-1"><img src="{% static 'mainapp/homepageassets/rarrow.svg' %}" alt=""></div>
+                </button>
+            </div>
+        </div>
+        <div id="parentscrolldiv3"
+            class="scrollbar sm:hover:overflow-x-scroll sm:overflow-hidden h-64  w-[98%] pt-4 grid grid-flow-col auto-cols-auto  scroll-smooth space-x-5">
+
+            {% for _ in 'x'|rjust:10 %}
+            <div>
+                <div class="h-40 w-40 bg-gray-800 animate-pulse shadow-lg rounded-md">
+
+                </div>
+                <div class="w-32 h-2 rounded bg-gray-700 animate-pulse  mt-3 ml-1">
+
+                </div>
+                <div class="w-20 h-2 rounded bg-gray-700 animate-pulse  mt-3 ml-1">
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <div class="flex-col poppins-regular mt-10 space-y-3 text-white">
+        <div class=" w-[98%] text-[30px] montserrat">Top Songs</div>
+        <div id="h4" class="w-full  grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-y-2">
+            {% for _ in 'x'|rjust:15 %}
+            <div>
+                <div class="flex space-x-2">
+                    <div class="w-[60px] h-[60px] bg-gray-800 animate-pulse shadow-lg rounded-md">
+
+                    </div>
+                    <div>
+                        <div class="h-2 w-24 rounded bg-gray-700 animate-pulse mt-1"></div>
+                        <div class="h-2 w-20 rounded bg-gray-700 animate-pulse mt-3"></div>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="flex-col poppins-regular mt-10 ">
+        <div class="text-white flex w-[98%] text-[30px] justify-between">
+            <div class="montserrat">Trending Artists</div>
+            <div id="scrollnavbtn" class="flex">
+                <button class="hover:scale-110" onclick="horizontalscroll(true,'parentscrolldiv5')">
+                    <div class="m-1"><img src="{% static 'mainapp/homepageassets/larrow.svg' %}" alt=""></div>
+                </button>
+                <button class="hover:scale-110" onclick="horizontalscroll(false,'parentscrolldiv5')">
+                    <div class="m-1"><img src="{% static 'mainapp/homepageassets/rarrow.svg' %}" alt=""></div>
+                </button>
+            </div>
+        </div>
+        <div id="parentscrolldiv5"
+            class="scrollbar  sm:hover:overflow-x-scroll sm:overflow-hidden h-52  w-[98%]  grid grid-flow-col auto-cols-auto  scroll-smooth space-x-7 pl-1">
+            {% for _ in 'x'|rjust:10 %}
+            <div>
+                <div class="h-[121px] w-[121px] bg-gray-800 animate-pulse shadow-lg rounded-md">
+
+                </div>
+                <div class="w-24 h-2 rounded bg-gray-700 animate-pulse  mt-3 ml-1">
+
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+</div>
+{% endblock content %}
+
+
+
+{% block script %}
+
+<script>
+
+
+    $("#grad-control").addClass("gradnav1");
+    $("#grad-control").append(`
+        <div id="allelements1" class="pt-8 flex flex-col ml-2 sm:ml-[100px] ">
+        <div id="ribbonbox" class="flex poppins-regular  scroll-smooth  w-[98%] space-x-3 mt-20">
+            <div class="h-10 w-24 rounded-full bg-gray-800 animate-pulse"></div>
+            <div class="h-10 w-24 rounded-full bg-gray-800 animate-pulse"></div>
+            <div class="h-10 w-24 rounded-full bg-gray-800 animate-pulse"></div>
+            <div class="h-10 w-24 rounded-full bg-gray-800 animate-pulse"></div>
+            <div class="h-10 w-24 rounded-full bg-gray-800 animate-pulse"></div>
+            <div class="h-10 w-24 rounded-full bg-gray-800 animate-pulse"></div>
+            <div class="h-10 w-24 rounded-full bg-gray-800 animate-pulse"></div>
+            
+        </div>
+        <div class="flex-col mt-10 ">
+            <div class="text-white flex w-[98%] text-[30px] justify-between ">
+                <div class="montserrat">Get Started</div>
+                <div id="scrollnavbtn" class="flex">
+                    <button class="hover:scale-110" onclick="horizontalscroll(true,'parentscrolldiv1')">
+                        <div class="m-1"><img src="{% static 'mainapp/homepageassets/larrow.svg' %}" alt=""></div>
+                    </button>
+                    <button class="hover:scale-110" onclick="horizontalscroll(false,'parentscrolldiv1')">
+                        <div class="m-1"><img src="{% static 'mainapp/homepageassets/rarrow.svg' %}" alt=""></div>
+                    </button>
+                </div>
+            </div>
+            <div id="parentscrolldiv1"
+                class=" scrollbar  sm:hover:overflow-x-scroll sm:overflow-hidden h-64  w-[98%] pt-4 grid grid-flow-col auto-cols-auto  scroll-smooth space-x-5">
+                {% for _ in 'x'|rjust:10 %}
+                <div>
+                    <div class="h-40 w-40 bg-gray-800 animate-pulse shadow-lg rounded-md">
+
+                    </div>
+                    <div class="w-32 h-2 rounded bg-gray-700 animate-pulse  mt-3 ml-1">
+
+                    </div>
+                    <div class="w-20 h-2 rounded bg-gray-700 animate-pulse  mt-3 ml-1">
+
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>`);
+
+</script>
+<script src="{% static 'mainapp/homepageassets/newhome.js' %}"></script>
+<script>
+    $(document).ready(function insertData() {
+        $.ajax({
+            type: 'GET',
+            url: "{% url 'getHomedata' %}",
+            success: function (response) {
+                $('#ribbonbox').empty();
+                response.ribbon.forEach(item=>{
+                    console.log(item);
+                    $('#ribbonbox').append(`
+                    <button class=" mr-2 text-white text-lg bg-[#1e1e1e]  hover:bg-[#1d88e6] rounded-full hover:border-white border-2 border-[#1d88e6] hover:shadow-lg hover:shadow-white hover:scale-110"  onclick = "getMood('${item.params}','${item.title}')">
+                        <div class="px-5 py-1 text-xl">${item.title}</div>
+                    </button>
+                    `);
+                });
+                $('#parentscrolldiv1').empty();
+                response.heading1.forEach(function (item) {
+
+                    $('#parentscrolldiv1').append(
+                        `
+                            <button class="hover:scale-110" ${item.Id[0]}="${item.Id[1]}" onclick = "getPL(this.getAttribute('${item.Id[0]}'),'${item.title}')">
+                                <div class="h-40 w-40 flex justify-center">
+                                    <img src="${item.thumbnail}" alt="">
+                                </div>
+                                <div class="text-white w-40 pt-1 text-container">
+                                    <span class="animated-text w-40 raleway">
+                                        ${item.title}
+                                    </span>
+                                </div>
+                                <div class="text-white w-40 h-[25px] lora">
+                                 ${item.artist}
+                                </div>
+                            </button>
+                        `
+                    );
+                    var $lastAddedText = $("#parentscrolldiv1 .animated-text").last();
+                    var trimmedText = $lastAddedText.text().trim();
+                    if (trimmedText.length <= 15) {
+
+                        $lastAddedText.removeClass("animated-text");
+                        $lastAddedText.closest(".text-container").removeClass("text-container");
+                    }
+
+                }
+                );
+
+                $('#parentscrolldiv2').empty();
+                response.heading2.forEach(function (item) {
+
+                    $('#parentscrolldiv2').append(
+                        `
+                            <button class="hover:scale-110" songId = "${item.videoId}" songname="${item.title}" songauthor="${item.artist}" thumbnail="${item.thumbnail}" onclick="loadSong(this.getAttribute('songId'),this.getAttribute('songname'),this.getAttribute('songauthor'),this.getAttribute('thumbnail'))">
+                                <div class="h-36 w-40 ">
+                                    <img src="${item.thumbnail}" alt="">
+                                </div>
+                                <div class="text-white w-40 pt-1 text-container">
+                                    <span class="text-white w-40 animated-text title-text raleway">
+                                        ${item.title}
+                                    </span>
+                                </div>
+                                <div class="text-white w-40 h-[25px] text-container">
+                                    <span class="text-white w-40 h-[25px] animated-text artist-text lora">
+                                        ${item.artist}
+                                    </span>
+                                </div>
+                            </button>
+                        `
+                    );
+                    var $lastAddedText = $("#parentscrolldiv2 .title-text").last();
+                    var trimmedText = $lastAddedText.text().trim();
+                    if (trimmedText.length <= 15) {
+
+                        $lastAddedText.removeClass("animated-text");
+                        $lastAddedText.closest(".text-container").removeClass("text-container");
+                    }
+
+                    var $lastAddedArtistText = $("#parentscrolldiv2 .artist-text").last();
+                    var trimmedArtistText = $lastAddedArtistText.text().trim();
+                    if (trimmedArtistText.length <= 15) {
+                        $lastAddedArtistText.removeClass("animated-text");
+                        $lastAddedArtistText.closest(".text-container").removeClass("text-container");
+                    }
+
+                }
+                );
+
+                $('#parentscrolldiv3').empty();
+                response.heading3.forEach(function (item) {
+
+                    $('#parentscrolldiv3').append(
+                        `
+                            <button class="hover:scale-110" albumId = "${item.browseId}" onclick = "getAL(this.getAttribute('albumId'),'${item.title}')">
+                                <div class="h-40 w-40 ">
+                                    <img src="${item.thumbnail}" alt="">
+                                </div>
+                                <div class="text-white w-40 pt-1 text-container">
+                                    <span class="text-white w-40 animated-text title-text raleway">
+                                        ${item.title}
+                                    </span>
+                                </div>
+                                <div class="text-white w-40 h-[25px] text-container">
+                                    <span class="text-white w-40 h-[25px] animated-text artist-text lora">
+                                        ${item.artist}
+                                    </span>
+                                </div>
+                            </button>
+                        `
+                    );
+                    var $lastAddedText = $("#parentscrolldiv3 .title-text").last();
+                    var trimmedText = $lastAddedText.text().trim();
+                    if (trimmedText.length <= 15) {
+
+                        $lastAddedText.removeClass("animated-text");
+                        $lastAddedText.closest(".text-container").removeClass("text-container");
+                    }
+
+                    var $lastAddedArtistText = $("#parentscrolldiv3 .artist-text").last();
+                    var trimmedArtistText = $lastAddedArtistText.text().trim();
+                    if (trimmedArtistText.length <= 15) {
+                        $lastAddedArtistText.removeClass("animated-text");
+                        $lastAddedArtistText.closest(".text-container").removeClass("text-container");
+                    }
+
+                }
+                );
+
+                $('#h4').empty();
+                response.heading4.forEach(function (item) {
+
+                    $('#h4').append(
+                        `
+                            
+                        <button class="flex space-x-2 hover:scale-110" songId = "${item.videoId}" songname="${item.title}" songauthor="${item.artist}" thumbnail="${item.thumbnail}" onclick="loadSong(this.getAttribute('songId'),this.getAttribute('songname'),this.getAttribute('songauthor'),this.getAttribute('thumbnail'))">
+                            <div class="">
+                                <img src="${item.thumbnail}" alt="">
+                            </div>
+                            <div>
+                                <div class="text-container text-start">
+                                    <span class="text-white w-40 animated-text title-text raleway">
+                                        ${item.title}
+                                    </span>
+                                </div>
+                                <div class="text-container text-start">
+                                    <span class="text-white w-40 animated-text artist-text lora">
+                                        ${item.artist}
+                                    </span>
+                                </div>
+                            </div>
+                        </button>
+                            
+                        `
+                    );
+                    var $lastAddedText = $("#h4 .title-text").last();
+                    var trimmedText = $lastAddedText.text().trim();
+                    if (trimmedText.length <= 20) {
+
+                        $lastAddedText.removeClass("animated-text");
+                        $lastAddedText.closest(".text-container").removeClass("text-container");
+                    }
+
+                    var $lastAddedArtistText = $("#h4 .artist-text").last();
+                    var trimmedArtistText = $lastAddedArtistText.text().trim();
+                    if (trimmedArtistText.length <= 20) {
+                        $lastAddedArtistText.removeClass("animated-text");
+                        $lastAddedArtistText.closest(".text-container").removeClass("text-container");
+                    }
+
+                }
+                );
+
+                $('#parentscrolldiv5').empty();
+                response.heading5.forEach(function (item) {
+
+                    $('#parentscrolldiv5').append(
+                        `
+                            <button class="hover:scale-110" author_id ='${item.browseId}' onclick = "getAR(this.getAttribute('author_id'),'${item.title}')" >
+                                <div class="h-[121px] w-[121px]  flex justify-center">
+                                    <img class="scale-125" src="${item.thumbnail}" alt="">
+                                </div>
+                                <div class="text-white w-32 mt-4 text-container  text-start">
+                                    <span class="text-white animated-text title-text lora">
+                                        ${item.title}
+                                    </span>
+                                </div>
+                                
+                            </button>
+                        `
+                    );
+                    var $lastAddedText = $("#parentscrolldiv5 .title-text").last();
+                    var trimmedText = $lastAddedText.text().trim();
+                    if (trimmedText.length <= 14) {
+
+                        $lastAddedText.removeClass("animated-text");
+                        $lastAddedText.closest(".text-container").removeClass("text-container");
+                    }
+
+                }
+                );
+            }
+
+
+
+
+        });
+    });
+
+</script>
+
+{% endblock script %}
+<!-- <script>$('#parentscrolldiv1').empty();</script> -->

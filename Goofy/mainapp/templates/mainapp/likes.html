@@ -1,0 +1,106 @@
+{% extends "mainapp/base.html" %}
+{% load static %}
+
+
+{% block title %}Likes{% endblock title %}
+{% block content %}
+<div id="allelements" class="pt-8 flex flex-col ml-2 sm:ml-[100px] ">
+
+    <div class="flex-col poppins-regular mt-16 ">
+
+        <div id="liked-head" class="flex-col text-white w-[98%]">
+            <div class="text-[30px] montserrat">Your Likes</div>
+            <div class="text-[20px]">Your liked music will be displayed here</div>
+        </div>
+
+        <div id="liked-content" class="">
+
+            <div class="text-white flex w-[98%] justify-between">
+                <div class="flex space-x-5">
+                    <div class="text-[30px] montserrat">Your Likes</div>
+
+                </div>
+                <div id="scrollnavbtn" class="flex">
+                    <button class="hover:scale-110" onclick="horizontalscroll(true,'likegrid')">
+                        <div class="m-1"><img src="{% static 'mainapp/homepageassets/larrow.svg' %}" alt=""></div>
+                    </button>
+                    <button class="hover:scale-110" onclick="horizontalscroll(false,'likegrid')">
+                        <div class="m-1"><img src="{% static 'mainapp/homepageassets/rarrow.svg' %}" alt=""></div>
+                    </button>
+                </div>
+            </div>
+
+            <div id="likegrid"
+                class="scrollbar sm:hover:overflow-x-scroll sm:overflow-hidden w-[98%] pt-4 pl-3 pb-2 scroll-smooth space-x-5 flex flex-nowrap ">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}
+{% block script %}
+<script>
+    $('#libimg').attr("src", "{% static 'mainapp/homepageassets/library2.svg' %}");
+    $('#homeimg').attr("src", "{% static 'mainapp/homepageassets/home2.svg' %}");
+    $('#exploreimg').attr("src", "{% static 'mainapp/homepageassets/explore2.svg' %}");
+    $('#likedsongsimg').attr("src", "{% static 'mainapp/homepageassets/mylikes1.svg' %}");
+    $('#profileimg').attr("src", "{% static 'mainapp/homepageassets/profile2.svg' %}");
+
+    $('#homebox').removeClass('hover:border-l-[#5398C9]').addClass('hover:border-l-white');
+    $('#explorebox').removeClass('hover:border-l-[#5398C9]').addClass('hover:border-l-white');
+    $('#librarybox').removeClass('hover:border-l-[#5398C9]').addClass('hover:border-l-white');
+    $('#likedsongsbox').removeClass('hover:border-l-[#5398C9]').addClass('hover:border-l-white');
+    $('#profilebox').removeClass('hover:border-l-[#5398C9]').addClass('hover:border-l-white');
+    $('#lchild').removeClass("bg-transparent");
+    $('#lchild').addClass("gradnav");
+</script>
+<script>
+    $.ajax({
+        url: "{% url 'getlikedsongs' %}",
+        type: "GET",
+        success: function (response) {
+            if (response.likedata) {
+                $("#liked-head").addClass("hidden");
+                response.likedata.forEach(song => {
+                    $("#likegrid").append(`
+                    <button class="hover:scale-110" songId = "${song.songId}" songname="${song.title}" songauthor="${song.author}" thumbnail="${song.thumbnail}" onclick="loadSong(this.getAttribute('songId'),this.getAttribute('songname'),this.getAttribute('songauthor'),this.getAttribute('thumbnail'))">
+                    <div class="w-40 ">
+                        <img src="${song.thumbnail}" alt="">
+                    </div>
+                    <div class="text-white w-40 pt-1 text-container">
+                        <span class="text-white animated-text w-40 title-text raleway">
+                            ${song.title}
+                        </span>
+                    </div>
+                    <div class="text-white w-40 h-[25px] text-container">
+                        <span class="text-white w-40 h-[25px] animated-text artist-text lora">
+                            ${song.author}
+                        </span>
+                    </div>
+                </button>
+                    `);
+                    var $lastAddedText = $("#likegrid .title-text").last();
+                    var trimmedText = $lastAddedText.text().trim();
+                    if (trimmedText.length <= 15) {
+
+                        $lastAddedText.removeClass("animated-text");
+                        $lastAddedText.closest(".text-container").removeClass("text-container");
+                    }
+
+                    var $lastAddedArtistText = $("#likegrid .artist-text").last();
+                    var trimmedArtistText = $lastAddedArtistText.text().trim();
+                    if (trimmedArtistText.length <= 15) {
+                        $lastAddedArtistText.removeClass("animated-text");
+                        $lastAddedArtistText.closest(".text-container").removeClass("text-container");
+                    }
+                });
+            }
+            else {
+                $("#liked-content").addClass("hidden");
+            }
+        }
+    })
+
+</script>
+{% endblock script %}
