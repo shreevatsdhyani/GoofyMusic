@@ -58,4 +58,7 @@ DATABASES = {
         'HOST':'localhost'
     }
 }
+```
+## Homepage
+![goofy](https://github.com/user-attachments/assets/5870d746-23fe-417b-a484-e2cf9ab20e33)
 
