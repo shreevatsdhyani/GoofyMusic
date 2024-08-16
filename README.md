@@ -39,7 +39,7 @@ Goofy is a feature-rich music streaming platform designed to provide users with 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/warui-slime/Goofy.git
+   git clone https://github.com/shreevatsdhyani/Goofymusic.git
    cd goofy
 
 2. Install dependencies:
